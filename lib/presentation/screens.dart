@@ -1,0 +1,12 @@
+export 'package:pixlify/presentation/account/account.screen.dart';
+export 'package:pixlify/presentation/ai_toolbox/ai_toolbox.screen.dart';
+export 'package:pixlify/presentation/auth_wrapper/auth_wrapper.screen.dart';
+export 'package:pixlify/presentation/forgot_password/forgot_password.screen.dart';
+export 'package:pixlify/presentation/home_view/home_view.screen.dart';
+export 'package:pixlify/presentation/landing_page/landing_page.screen.dart';
+export 'package:pixlify/presentation/personal_info/personal_info.screen.dart';
+export 'package:pixlify/presentation/sign_in/sign_in.screen.dart';
+export 'package:pixlify/presentation/sign_up/sign_up.screen.dart';
+export 'package:pixlify/presentation/splash/splash.screen.dart';
+export 'package:pixlify/presentation/walkthrough/walkthrough.screen.dart';
+export 'package:pixlify/presentation/welcome/welcome.screen.dart';
