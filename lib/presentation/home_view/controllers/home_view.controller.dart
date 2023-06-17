@@ -10,10 +10,14 @@ class HomeViewController extends GetxController {
   List<File> get recentImages => _recentImages.value;
   bool get loading => _loading.value;
   bool get error => _error.value;
+  int get selectedOptionIndex => _selectedOptionIndex.value;
+  set selectedOptionIndex(int value) => _selectedOptionIndex.value = value;
   Rx<List<File>> _recentImages = Rx<List<File>>([]);
   RxBool _loading = true.obs;
   RxBool _error = false.obs;
   final scrollController = ScrollController();
+  RxInt _selectedOptionIndex = 0.obs;
+  File? selectedImage;
 
   @override
   void onInit() {
@@ -29,6 +33,11 @@ class HomeViewController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  void updateOptionIndex(int index) {
+    _selectedOptionIndex.value = index;
+    update();
   }
 
   void getImagesFromPhone() async {
@@ -65,4 +74,36 @@ class HomeViewController extends GetxController {
     }
     return false;
   }
+
+  final saveOptioons = <SaveOption>[
+    SaveOption(
+      resolution: '400 x 600',
+      isPro: false,
+    ),
+    SaveOption(
+      resolution: ' 800 x 1200',
+      isPro: false,
+    ),
+    SaveOption(
+      resolution: '1600 x 2400',
+      isPro: true,
+    ),
+    SaveOption(
+      resolution: '2000 x 3000',
+      isPro: true,
+    ),
+    SaveOption(
+      resolution: '4000 x 6000',
+      isPro: true,
+    ),
+  ];
+}
+
+class SaveOption {
+  final String resolution;
+  final bool isPro;
+  SaveOption({
+    required this.resolution,
+    required this.isPro,
+  });
 }

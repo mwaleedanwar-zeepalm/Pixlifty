@@ -40,10 +40,10 @@ class AppColors {
   static const kGreyScale100 = Color(0xFFF5F5F5);
   static const kGreyScale050 = Color(0xFFFAFAFA);
   static const kDark1 = Color(0xFF181A20);
-  static const kDark2 = Color(0xFF181A20);
-  static const kDark3 = Color(0xFF181A20);
-  static const kDark4 = Color(0xFF181A20);
-  static const kDark5 = Color(0xFF181A20);
+  static const kDark2 = Color(0xFF1E2025);
+  static const kDark3 = Color(0xFF1F222A);
+  static const kDark4 = Color(0xFF262A35);
+  static const kDark5 = Color(0xFF35383F);
   static const kWhite = Color(0xFFFFFFFF);
   static const kBlack = Color(0xFF000000);
   static const kRed = Color(0xFFF44336);

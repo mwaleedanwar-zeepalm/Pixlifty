@@ -6,14 +6,17 @@ import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/infrastructure/navigation/navigation.dart';
 import 'package:pixlify/infrastructure/navigation/routes.dart';
 import 'package:pixlify/intial_binding.dart';
+import 'package:pixlify/theme.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Get.putAsync<ThemeService>(() async => ThemeService());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const Pixlify());
 }
 
 /// Root widget for the entire app
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Pixlify extends StatelessWidget {
+  const Pixlify({super.key});
 
   // This widget is the root of your application.
   @override
@@ -26,7 +29,24 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           scaffoldBackgroundColor: AppColors.kWhite,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: AppColors.kWhite,
+            surfaceTintColor: AppColors.kWhite,
+            elevation: 0,
+          ),
         ),
+        darkTheme: ThemeData(
+          useMaterial3: true,
+          scaffoldBackgroundColor: AppColors.kDark1,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: AppColors.kDark1,
+            surfaceTintColor: AppColors.kDark1,
+            elevation: 0,
+          ),
+        ),
+        themeMode: Get.find<ThemeService>().isDarkMode
+            ? ThemeMode.dark
+            : ThemeMode.light,
         initialRoute: Routes.SPLASH,
         getPages: Nav.routes,
         initialBinding: InitialBindings(),

@@ -13,18 +13,4 @@ class ForgotPasswordController extends GetxController {
   final _confirmPasswordController = TextEditingController();
   final _pageController = PageController();
   RxBool _loading = false.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

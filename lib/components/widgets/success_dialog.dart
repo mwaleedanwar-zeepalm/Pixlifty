@@ -9,6 +9,7 @@ import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/images/animations.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/theme.dart';
 
 /// To be shown via Get.dialog<void>(SuccessDialog()); Shows a dialog with the
 /// success lottie animation, a title and a description.
@@ -20,11 +21,14 @@ class SuccessDialog extends StatelessWidget {
   });
   final String title;
   final String description;
+
+  ThemeService get theme => Get.find<ThemeService>();
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.kWhite,
-      surfaceTintColor: AppColors.kWhite,
+      backgroundColor: theme.dialogColor,
+      surfaceTintColor: theme.dialogColor,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -50,7 +54,9 @@ class SuccessDialog extends StatelessWidget {
           ),
           Text(
             description,
-            style: AppTypography.BodyLRegular,
+            style: AppTypography.BodyLRegular.copyWith(
+              color: theme.primaryTextColor,
+            ),
             textAlign: TextAlign.center,
             maxLines: 2,
           ),

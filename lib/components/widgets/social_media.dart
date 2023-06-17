@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/theme.dart';
 
 class SocialMediaButton extends StatelessWidget {
   const SocialMediaButton({
@@ -19,6 +21,7 @@ class SocialMediaButton extends StatelessWidget {
   final double? width;
   final TextStyle? style;
   final double? height;
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -27,9 +30,9 @@ class SocialMediaButton extends StatelessWidget {
         height: (height ?? 60).h,
         width: width?.w ?? double.maxFinite,
         decoration: BoxDecoration(
-          color: AppColors.kWhite,
+          color: theme.socialMediaLoginButtonColor,
           border: Border.all(
-            color: AppColors.kGreyScale200,
+            color: theme.socialMediaLoginButtonBorderColor,
             width: 1.w,
           ),
           borderRadius: BorderRadius.circular(100.r),
@@ -43,7 +46,10 @@ class SocialMediaButton extends StatelessWidget {
             ),
             Text(
               'Continue with $platform',
-              style: style ?? AppTypography.BodyXlBold,
+              style: style ??
+                  AppTypography.BodyXlBold.copyWith(
+                    color: theme.primaryTextColor,
+                  ),
             ),
           ],
         ),

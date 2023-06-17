@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/presentation/landing_page/controllers/landing_page.controller.dart';
+import 'package:pixlify/theme.dart';
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({super.key});
 
   LandingPageController get controller => Get.find<LandingPageController>();
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => BottomAppBar(
         padding: EdgeInsets.zero,
-        color: AppColors.kWhite,
+        color: theme.navigationBarBackgroundColor,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               height: 85.h,
               width: Get.width,
-              color: AppColors.kWhite,
+              color: theme.navigationBarBackgroundColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

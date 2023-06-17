@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/theme.dart';
 
 /// Custom text form field to be used in app. Requires a TextEditingController.
 class SkinnyPasswordTextFormField extends StatefulWidget {
@@ -35,6 +37,7 @@ class SkinnyPasswordTextFormField extends StatefulWidget {
 class _SkinnyPasswordTextFormFieldState
     extends State<SkinnyPasswordTextFormField> {
   bool hidePassword = true;
+  final theme = Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -46,13 +49,13 @@ class _SkinnyPasswordTextFormFieldState
       enabled: widget.enabled,
       decoration: InputDecoration(
         prefixIcon: widget.prefixIcon,
-        suffixIcon: IconButton(
-          onPressed: () {
+        suffixIcon: InkWell(
+          onTap: () {
             setState(() {
               hidePassword = !hidePassword;
             });
           },
-          icon: Icon(
+          child: Icon(
             hidePassword ? IconlyLight.show : IconlyLight.hide,
             color: AppColors.kPrimary,
           ),
@@ -63,10 +66,16 @@ class _SkinnyPasswordTextFormFieldState
           vertical: 18.h,
         ),
         border: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.kGreyScale500, width: 1.w),
+          borderSide: BorderSide(
+            color: theme.textBoxUnfocusedBorderColor,
+            width: 1.w,
+          ),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.kGreyScale500, width: 1.w),
+          borderSide: BorderSide(
+            color: theme.textBoxUnfocusedBorderColor,
+            width: 1.w,
+          ),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(

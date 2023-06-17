@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/infrastructure/navigation/routes.dart';
+import 'package:pixlify/theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,11 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     1.5.seconds.delay(() {
-      Get.offNamed('/walkthrough');
+      Get.offNamed(Routes.WALKTHROUGH);
     });
     super.initState();
   }
 
+  ThemeService theme = Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Text(
             'Pixlify',
-            style: AppTypography.h2Bold,
+            style: AppTypography.h2Bold.copyWith(color: theme.primaryTextColor),
           ),
           SizedBox(
             height: 200.h,

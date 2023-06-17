@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pixlify/infrastructure/navigation/routes.dart';
 
 class WalkthroughController extends GetxController {
   bool get end => _end.value;
@@ -7,15 +8,11 @@ class WalkthroughController extends GetxController {
   RxBool _end = false.obs;
 
   final _pageController = PageController();
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   /// next page
   void nextPage() async {
     if (pageController.page == 2) {
-      Get.offAndToNamed('/auth-wrapper');
+      Get.offAndToNamed(Routes.AUTH_WRAPPER);
       return;
     }
     await pageController.nextPage(

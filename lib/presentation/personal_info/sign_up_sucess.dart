@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/theme.dart';
 
 /// Sign up success dialog. Use with Get.dialog(SignUpSuccess());
 class SignUpSuccess extends StatelessWidget {
   const SignUpSuccess({super.key});
-
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.kWhite,
-      surfaceTintColor: AppColors.kWhite,
+      backgroundColor: theme.dialogColor,
+      surfaceTintColor: theme.dialogColor,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -40,7 +42,9 @@ class SignUpSuccess extends StatelessWidget {
           ),
           Text(
             'Please wait...\nYou will be directed to the homepage.',
-            style: AppTypography.BodyLRegular,
+            style: AppTypography.BodyLRegular.copyWith(
+              color: theme.primaryTextColor,
+            ),
             textAlign: TextAlign.center,
             maxLines: 2,
           ),

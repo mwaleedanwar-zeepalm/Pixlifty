@@ -14,6 +14,7 @@ import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/components/widgets/rounded_button.dart';
 import 'package:pixlify/components/widgets/skinny_password_text_form_field.dart';
 import 'package:pixlify/components/widgets/skinny_text_form_field.dart';
+import 'package:pixlify/theme.dart';
 
 import 'controllers/forgot_password.controller.dart';
 
@@ -52,6 +53,7 @@ class ForgetPasswordEmail extends StatelessWidget {
   const ForgetPasswordEmail({super.key});
   ForgotPasswordController get controller =>
       Get.find<ForgotPasswordController>();
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -79,7 +81,9 @@ class ForgetPasswordEmail extends StatelessWidget {
               ),
               Text(
                 'Reset your password 🔑',
-                style: AppTypography.h3Bold,
+                style: AppTypography.h3Bold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 16.h,
@@ -87,14 +91,18 @@ class ForgetPasswordEmail extends StatelessWidget {
               Text(
                 'Please enter your email and we will send an OTP code in the next step to reset your password.',
                 maxLines: 4,
-                style: AppTypography.BodyXlRegular,
+                style: AppTypography.BodyXlRegular.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 30.h,
               ),
               Text(
                 'Email',
-                style: AppTypography.BodyLBold,
+                style: AppTypography.BodyLBold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SkinnyTextFormField(
                 controller: controller.emailController,
@@ -108,7 +116,12 @@ class ForgetPasswordEmail extends StatelessWidget {
                 height: Get.height * 0.5,
               ),
               RoundedButton(
-                onTap: () {},
+                onTap: () {
+                  controller.pageController.nextPage(
+                    duration: 100.milliseconds,
+                    curve: Curves.easeInCubic,
+                  );
+                },
                 label: 'Continue',
               ),
             ],
@@ -124,6 +137,7 @@ class ForgetPasswordOTP extends StatelessWidget {
   const ForgetPasswordOTP({super.key});
   ForgotPasswordController get controller =>
       Get.find<ForgotPasswordController>();
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -151,7 +165,9 @@ class ForgetPasswordOTP extends StatelessWidget {
               ),
               Text(
                 'OTP code verification 🔐',
-                style: AppTypography.h3Bold,
+                style: AppTypography.h3Bold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 16.h,
@@ -159,23 +175,26 @@ class ForgetPasswordOTP extends StatelessWidget {
               Text(
                 'We have sent an OTP code to your email and********ley@yourdomain.com. Enter the OTP code below to verify.',
                 maxLines: 4,
-                style: AppTypography.BodyXlRegular,
+                style: AppTypography.BodyXlRegular.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 30.h,
               ),
               OtpTextField(
-                borderColor: AppColors.kGreyScale200,
-                fillColor: AppColors.kGreyScale050,
-                focusedBorderColor: AppColors.kGreyScale200,
+                borderColor: theme.socialMediaLoginButtonColor,
+                fillColor: theme.socialMediaLoginButtonBorderColor,
+                focusedBorderColor: AppColors.kPrimary,
                 fieldWidth: 70.w,
                 showFieldAsBox: true,
-                cursorColor: AppColors.kBlack,
+                cursorColor: AppColors.kPrimary,
                 filled: true,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 borderRadius: BorderRadius.circular(12.r),
                 textStyle: AppTypography.h4Bold.copyWith(
-                  color: AppColors.kGreyScale900,
+                  color: theme.primaryTextColor,
+                  height: 1,
                 ),
                 onSubmit: (value) {},
               ),
@@ -185,7 +204,9 @@ class ForgetPasswordOTP extends StatelessWidget {
               Center(
                 child: Text(
                   "Didn't receive email?",
-                  style: AppTypography.BodyXlMedium,
+                  style: AppTypography.BodyXlMedium.copyWith(
+                    color: theme.primaryTextColor,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -220,6 +241,7 @@ class CountdownState extends State<Countdown> {
     });
   }
 
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -227,7 +249,9 @@ class CountdownState extends State<Countdown> {
       children: [
         Text(
           'You can resend code in ',
-          style: AppTypography.BodyXlMedium,
+          style: AppTypography.BodyXlMedium.copyWith(
+            color: theme.primaryTextColor,
+          ),
         ),
         Text(
           '${limit.inSeconds} ',
@@ -235,7 +259,9 @@ class CountdownState extends State<Countdown> {
         ),
         Text(
           's',
-          style: AppTypography.BodyXlMedium,
+          style: AppTypography.BodyXlMedium.copyWith(
+            color: theme.primaryTextColor,
+          ),
         ),
       ],
     );
@@ -247,7 +273,7 @@ class ForgetPasswordNewPassword extends StatelessWidget {
   const ForgetPasswordNewPassword({super.key});
   ForgotPasswordController get controller =>
       Get.find<ForgotPasswordController>();
-
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -275,7 +301,9 @@ class ForgetPasswordNewPassword extends StatelessWidget {
               ),
               Text(
                 'Create new password 🔒',
-                style: AppTypography.h3Bold,
+                style: AppTypography.h3Bold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 16.h,
@@ -283,14 +311,18 @@ class ForgetPasswordNewPassword extends StatelessWidget {
               Text(
                 'Create your new password. If you forget it, then you have to do forgot password.',
                 maxLines: 4,
-                style: AppTypography.BodyXlRegular,
+                style: AppTypography.BodyXlRegular.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SizedBox(
                 height: 30.h,
               ),
               Text(
                 'New Password',
-                style: AppTypography.BodyLBold,
+                style: AppTypography.BodyLBold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SkinnyPasswordTextFormField(
                 controller: controller.passwordController,
@@ -301,7 +333,9 @@ class ForgetPasswordNewPassword extends StatelessWidget {
               ),
               Text(
                 'Confirm New Password',
-                style: AppTypography.BodyLBold,
+                style: AppTypography.BodyLBold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               SkinnyPasswordTextFormField(
                 controller: controller.confirmPasswordController,
@@ -335,11 +369,12 @@ class ResetPasswordSuccessDialog extends StatelessWidget {
   });
   final String title;
   final String description;
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.kWhite,
-      surfaceTintColor: AppColors.kWhite,
+      backgroundColor: theme.dialogColor,
+      surfaceTintColor: theme.dialogColor,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -365,7 +400,9 @@ class ResetPasswordSuccessDialog extends StatelessWidget {
           ),
           Text(
             description,
-            style: AppTypography.BodyLRegular,
+            style: AppTypography.BodyLRegular.copyWith(
+              color: theme.primaryTextColor,
+            ),
             textAlign: TextAlign.center,
             maxLines: 2,
           ),

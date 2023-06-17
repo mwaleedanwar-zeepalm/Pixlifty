@@ -9,12 +9,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/components/widgets/rounded_button.dart';
 import 'package:pixlify/components/widgets/rounded_button_lite.dart';
+import 'package:pixlify/presentation/home_view/confirm_image_enhance_dialog.dart';
+import 'package:pixlify/theme.dart';
 
 import 'controllers/home_view.controller.dart';
 
 class HomeViewScreen extends StatelessWidget {
   const HomeViewScreen({Key? key}) : super(key: key);
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return GetX<HomeViewController>(
@@ -46,7 +50,9 @@ class HomeViewScreen extends StatelessWidget {
               ),
               title: Text(
                 'Pixlify',
-                style: AppTypography.h4Bold,
+                style: AppTypography.h4Bold.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
               centerTitle: true,
             ),
@@ -92,13 +98,21 @@ class HomeViewScreen extends StatelessWidget {
                   vertical: 20.h,
                 ),
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.all(6.0.w),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.r),
-                      child: Image.file(
-                        controller.recentImages[index],
-                        fit: BoxFit.cover,
+                  return InkWell(
+                    onTap: () => Get.dialog<Widget>(
+                      ConfirmImageEnhanceDialog(
+                        image: controller.recentImages[index],
+                      ),
+                      barrierDismissible: false,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(6.0.w),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.r),
+                        child: Image.file(
+                          controller.recentImages[index],
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   );
@@ -114,7 +128,6 @@ class HomeViewScreen extends StatelessWidget {
 
 class AIToolboxBannerHome extends StatelessWidget {
   const AIToolboxBannerHome({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -169,7 +182,7 @@ class AIToolboxBannerHome extends StatelessWidget {
                       SizedBox(
                         height: 16.h,
                       ),
-                      RoundedButtonLite(
+                      RoundedButton(
                         onTap: () {
                           log('Try Now');
                         },

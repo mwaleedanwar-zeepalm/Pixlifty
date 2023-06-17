@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/theme.dart';
 
 /// Simple rounded button counterpart to simple button
 class RoundedButtonLite extends StatelessWidget {
@@ -21,6 +23,8 @@ class RoundedButtonLite extends StatelessWidget {
   final double? height;
   final TextStyle? style;
 
+  ThemeService get theme => Get.find<ThemeService>();
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -29,14 +33,14 @@ class RoundedButtonLite extends StatelessWidget {
         width: (width ?? 183).w,
         height: (height ?? 58).h,
         decoration: BoxDecoration(
-          color: color ?? AppColors.kPrimary050,
+          color: color ?? theme.roundButtonLiteColor,
           borderRadius: BorderRadius.circular(100.r),
         ),
         alignment: Alignment.center,
         child: Text(
           label,
           style: (style ?? AppTypography.BodyLBold).copyWith(
-            color: AppColors.kPrimary,
+            color: theme.roundButtonLiteTextColor,
           ),
         ),
       ),

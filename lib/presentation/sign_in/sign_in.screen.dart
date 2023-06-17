@@ -3,26 +3,26 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/components/widgets/rounded_button.dart';
-import 'package:pixlify/components/widgets/simple_button.dart';
 import 'package:pixlify/components/widgets/simple_check_box.dart';
 import 'package:pixlify/components/widgets/skinny_password_text_form_field.dart';
 import 'package:pixlify/components/widgets/skinny_text_form_field.dart';
-
-import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/widgets/social_media_tile.dart';
 import 'package:pixlify/components/widgets/success_dialog.dart';
+import 'package:pixlify/infrastructure/navigation/routes.dart';
 import 'package:pixlify/presentation/auth_wrapper/controllers/auth_wrapper.controller.dart';
-import 'package:pixlify/presentation/screens.dart';
 import 'package:pixlify/presentation/sign_in/controllers/sign_in.controller.dart';
+import 'package:pixlify/theme.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
+
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return GetX<SignInController>(
@@ -58,18 +58,24 @@ class SignInScreen extends StatelessWidget {
                     ),
                     Text(
                       'Welcome back 👋',
-                      style: AppTypography.h3Bold,
+                      style: AppTypography.h3Bold.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     Text(
                       'Please enter your email & password to sign in.',
-                      style: AppTypography.BodyXlRegular,
+                      style: AppTypography.BodyXlRegular.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     SizedBox(
                       height: 30.h,
                     ),
                     Text(
                       'Email',
-                      style: AppTypography.BodyLBold,
+                      style: AppTypography.BodyLBold.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     SkinnyTextFormField(
                       controller: controller.email,
@@ -77,6 +83,7 @@ class SignInScreen extends StatelessWidget {
                       suffixIcon: Icon(
                         IconlyLight.message,
                         size: 28.w,
+                        color: theme.defaultIconColor,
                       ),
                     ),
                     SizedBox(
@@ -84,7 +91,9 @@ class SignInScreen extends StatelessWidget {
                     ),
                     Text(
                       'Password',
-                      style: AppTypography.BodyLBold,
+                      style: AppTypography.BodyLBold.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     SkinnyPasswordTextFormField(
                       controller: controller.pwd,
@@ -110,8 +119,8 @@ class SignInScreen extends StatelessWidget {
                     SizedBox(
                       height: 30.h,
                     ),
-                    const Divider(
-                      color: AppColors.kGreyScale200,
+                    Divider(
+                      color: theme.primaryDividerColor,
                     ),
                     SizedBox(
                       height: 30.h,
@@ -119,7 +128,7 @@ class SignInScreen extends StatelessWidget {
                     Center(
                       child: InkWell(
                         onTap: () {
-                          Get.toNamed('/forgot-password');
+                          Get.toNamed(Routes.FORGOT_PASSWORD);
                         },
                         child: Text(
                           'Forgot password?',
@@ -137,14 +146,16 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         Text(
                           "Don’t have an account?",
-                          style: AppTypography.BodyLMedium,
+                          style: AppTypography.BodyLMedium.copyWith(
+                            color: theme.primaryTextColor,
+                          ),
                         ),
                         SizedBox(
                           width: 8.w,
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offAndToNamed('/sign-up');
+                            Get.offAndToNamed(Routes.SIGN_UP);
                           },
                           child: Text(
                             'Sign up',
@@ -162,7 +173,7 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Divider(
-                            color: AppColors.kGreyScale200,
+                            color: theme.primaryDividerColor,
                           ),
                         ),
                         Padding(
@@ -170,13 +181,13 @@ class SignInScreen extends StatelessWidget {
                           child: Text(
                             'or continue with',
                             style: AppTypography.h6Medium.copyWith(
-                              color: AppColors.kGreyScale700,
+                              color: theme.subtextColor,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            color: AppColors.kGreyScale200,
+                            color: theme.primaryDividerColor,
                           ),
                         ),
                       ],
@@ -217,7 +228,6 @@ class SignInScreen extends StatelessWidget {
                           description:
                               'Please wait...\nYou will be directed to the homepage.',
                         );
-                        log('signging in');
                         Get
                           ..back<void>()
                           ..find<AuthWrapperController>().signIn();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 
@@ -26,7 +27,7 @@ class RoundedButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: width?.w ?? double.maxFinite,
+        width: width?.w ?? Get.width,
         height: (height ?? 58).h,
         decoration: BoxDecoration(
           color: color ?? AppColors.kPrimary,

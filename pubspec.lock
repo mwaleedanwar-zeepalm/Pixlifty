@@ -142,6 +142,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flutter_painter_v2:
+    dependency: "direct main"
+    description:
+      name: flutter_painter_v2
+      sha256: "5f9589670fb2385b69daf60ad1919c4f2b9ae2c5ee5199c0172c674032020470"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -224,6 +232,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  image_compare_slider:
+    dependency: "direct main"
+    description:
+      name: image_compare_slider
+      sha256: "6bc1f8d99385a67283f334515b5d1b03670c425e4ce54050c734d794f033b39f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
+  image_painter:
+    dependency: "direct main"
+    description:
+      name: image_painter
+      sha256: d0f1637eb87b08a84e2fcf197dda8667365988314c20a9065115762ce43ae3d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   image_picker:
     dependency: "direct main"
     description:

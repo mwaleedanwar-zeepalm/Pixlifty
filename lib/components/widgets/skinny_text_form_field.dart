@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
+import 'package:pixlify/theme.dart';
 
 /// Custom text form field to be used in app. Requires a TextEditingController.
 class SkinnyTextFormField extends StatelessWidget {
@@ -32,6 +33,7 @@ class SkinnyTextFormField extends StatelessWidget {
   final int maxLines;
   final String? Function(String?)? validator;
   final double? width;
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -41,9 +43,15 @@ class SkinnyTextFormField extends StatelessWidget {
       focusNode: focusNode,
       obscureText: isPassword,
       enabled: enabled,
+      style: AppTypography.h5Bold.copyWith(
+        color: theme.primaryTextColor,
+      ),
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        suffixIconConstraints: BoxConstraints(
+          maxHeight: 40.h,
+        ),
         enabled: enabled,
         alignLabelWithHint: true,
         contentPadding: EdgeInsets.symmetric(
@@ -53,10 +61,16 @@ class SkinnyTextFormField extends StatelessWidget {
           maxWidth: width ?? Get.width,
         ),
         border: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.kGreyScale500, width: 1.w),
+          borderSide: BorderSide(
+            color: theme.textBoxUnfocusedBorderColor,
+            width: 1.w,
+          ),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.kGreyScale500, width: 1.w),
+          borderSide: BorderSide(
+            color: theme.textBoxUnfocusedBorderColor,
+            width: 1.w,
+          ),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
@@ -70,10 +84,12 @@ class SkinnyTextFormField extends StatelessWidget {
             width: 2.w,
           ),
         ),
-        focusColor: AppColors.kGreyScale100,
         hintText: hintText,
         errorStyle: AppTypography.BodyMRegular.copyWith(
           color: AppColors.kAlertError,
+        ),
+        hintStyle: AppTypography.h5Bold.copyWith(
+          color: theme.hintTextColor,
         ),
         errorMaxLines: 1,
         disabledBorder: UnderlineInputBorder(

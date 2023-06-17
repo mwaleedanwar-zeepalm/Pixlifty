@@ -15,9 +15,11 @@ import 'package:pixlify/components/widgets/skinny_text_form_field.dart';
 import 'package:pixlify/presentation/personal_info/controllers/personal_info.controller.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/presentation/personal_info/sign_up_sucess.dart';
+import 'package:pixlify/theme.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
   const PersonalInfoScreen({Key? key}) : super(key: key);
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return GetX<PersonalInfoController>(
@@ -53,11 +55,15 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter personal info 📋',
-                    style: AppTypography.h3Bold,
+                    style: AppTypography.h3Bold.copyWith(
+                      color: theme.primaryTextColor,
+                    ),
                   ),
                   Text(
                     "Please enter your profile. Don't worry, only you can see your personal data. No one else will be able to see it. Or you can skip it for now.",
-                    style: AppTypography.BodyXlRegular,
+                    style: AppTypography.BodyXlRegular.copyWith(
+                      color: theme.primaryTextColor,
+                    ),
                   ),
                   SizedBox(
                     height: 24.h,
@@ -80,13 +86,14 @@ class PersonalInfoScreen extends StatelessWidget {
                                 backgroundImage: controller.image == null
                                     ? null
                                     : FileImage(controller.image!),
-                                backgroundColor: AppColors.kGreyScale100,
+                                backgroundColor:
+                                    theme.emptyAvatarBackGroundColor,
                                 child: ClipOval(
                                   child: Transform.translate(
                                     offset: Offset(-12.w, 0),
                                     child: Icon(
                                       Icons.person_rounded,
-                                      color: AppColors.kGreyScale400,
+                                      color: theme.emptyAvatarIconColor,
                                       size: 140.w,
                                     ),
                                   ),
@@ -121,7 +128,9 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   Text(
                     'Phone Number',
-                    style: AppTypography.BodyLBold,
+                    style: AppTypography.BodyLBold.copyWith(
+                      color: theme.primaryTextColor,
+                    ),
                   ),
                   SkinnyTextFormField(
                     prefixIcon: CountryCodePicker(
@@ -146,7 +155,10 @@ class PersonalInfoScreen extends StatelessWidget {
                               SizedBox(
                                 width: 8.w,
                               ),
-                              const Icon(IconlyLight.arrow_down_2),
+                              Icon(
+                                IconlyLight.arrow_down_2,
+                                color: theme.defaultIconColor,
+                              ),
                             ],
                           ),
                         );
@@ -160,7 +172,9 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   Text(
                     'Date of Birth',
-                    style: AppTypography.BodyLBold,
+                    style: AppTypography.BodyLBold.copyWith(
+                      color: theme.primaryTextColor,
+                    ),
                   ),
                   SizedBox(
                     height: 12.h,
@@ -171,7 +185,9 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   Text(
                     'Gender',
-                    style: AppTypography.BodyLBold,
+                    style: AppTypography.BodyLBold.copyWith(
+                      color: theme.primaryTextColor,
+                    ),
                   ),
                   SizedBox(
                     height: 12.h,
@@ -182,7 +198,7 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   SimpleButton(
                     onTap: () {
-                      Get.dialog(const SignUpSuccess());
+                      Get.dialog<Widget>(const SignUpSuccess());
                     },
                     label: 'Save',
                   ),
@@ -201,67 +217,126 @@ class PersonalInfoScreen extends StatelessWidget {
 
 class DateOfBirthPicker extends StatelessWidget {
   const DateOfBirthPicker({Key? key}) : super(key: key);
-  PersonalInfoController get controller => Get.find<PersonalInfoController>();
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Get.bottomSheet<Widget>(
-          Container(
-            height: 300.h,
-            decoration: BoxDecoration(
-              color: AppColors.kWhite,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.r),
-                topRight: Radius.circular(16.r),
-              ),
-            ),
-            child: CupertinoDatePicker(
-              backgroundColor: AppColors.kWhite,
-              dateOrder: DatePickerDateOrder.mdy,
-              mode: CupertinoDatePickerMode.date,
-              initialDateTime: DateTime.now(),
-              onDateTimeChanged: (DateTime newDateTime) {
-                controller.updateDateOfBirth(newDateTime);
+    return GetX<PersonalInfoController>(
+        builder: (controller) => InkWell(
+              onTap: () async {
+                await Get.bottomSheet<Widget>(
+                  Container(
+                    height: 300.h,
+                    decoration: BoxDecoration(
+                      color: theme.bottomSheetColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16.r),
+                        topRight: Radius.circular(16.r),
+                      ),
+                    ),
+                    child: CupertinoDatePicker(
+                      backgroundColor: theme.bottomSheetColor,
+                      dateOrder: DatePickerDateOrder.mdy,
+                      mode: CupertinoDatePickerMode.date,
+                      initialDateTime: DateTime.now(),
+                      onDateTimeChanged: (DateTime newDateTime) {
+                        controller.updateDateOfBirth(newDateTime);
+                      },
+                    ),
+                  ),
+                );
+                // controller.updateDateOfBirth(
+                //   await showDatePicker(
+                //     context: context,
+                //     initialDate: DateTime.now(),
+                //     firstDate: DateTime.now().subtract(24000.days),
+                //     lastDate: DateTime.now(),
+                //     initialDatePickerMode: DatePickerMode.year,
+                //     initialEntryMode: DatePickerEntryMode.input,
+                //     currentDate: controller.dateOfBirth,
+                //     builder: (context, child) => DatePickerTheme(
+                //       data: DatePickerThemeData(
+                //         backgroundColor: theme.scaffoldColor,
+                //         headerBackgroundColor: theme.scaffoldColor,
+                //         yearForegroundColor:
+                //             MaterialStateProperty.resolveWith((states) {
+                //           if (states.contains(MaterialState.selected)) {
+                //             return AppColors.kWhite;
+                //           }
+                //           return theme.primaryTextColor;
+                //         }),
+                //         yearBackgroundColor:
+                //             MaterialStateProperty.resolveWith((states) {
+                //           if (states.contains(MaterialState.selected)) {
+                //             return AppColors.kPrimary;
+                //           }
+                //           return theme.scaffoldColor;
+                //         }),
+                //         yearOverlayColor: MaterialStatePropertyAll(
+                //           AppColors.kPrimary,
+                //         ),
+                //         todayBackgroundColor:
+                //             MaterialStateProperty.resolveWith((states) {
+                //           if (states.contains(MaterialState.selected)) {
+                //             return AppColors.kPrimary;
+                //           }
+                //           return theme.scaffoldColor;
+                //         }),
+                //         todayForegroundColor:
+                //             MaterialStateProperty.resolveWith((states) {
+                //           if (states.contains(MaterialState.selected)) {
+                //             return AppColors.kWhite;
+                //           }
+                //           return theme.primaryTextColor;
+                //         }),
+                //         todayBorder: BorderSide(
+                //           color: theme.scaffoldColor,
+                //           width: 0,
+                //         ),
+                //         yearStyle: AppTypography.BodyMMedium.copyWith(
+                //           color: theme.primaryTextColor,
+                //         ),
+                //         rangePickerBackgroundColor: theme.scaffoldColor,
+                //       ),
+                //       child: child!,
+                //     ),
+                //   ),
+                // );
               },
-            ),
-          ),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(color: AppColors.kGreyScale500, width: 1.w),
-          ),
-        ),
-        height: 40.h,
-        width: Get.width,
-        child: Row(
-          children: [
-            if (controller.dateOfBirth == null)
-              Text(
-                'MM/DD/YYYY',
-                style: AppTypography.h5Bold.copyWith(
-                  color: AppColors.kGreyScale400,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom:
+                        BorderSide(color: AppColors.kGreyScale500, width: 1.w),
+                  ),
                 ),
-              )
-            else
-              Text(
-                DateFormat.yMd().format(controller.dateOfBirth!),
-                style: AppTypography.h5Bold.copyWith(
-                  color: AppColors.kGreyScale400,
+                height: 40.h,
+                width: Get.width,
+                child: Row(
+                  children: [
+                    if (controller.dateOfBirth == null)
+                      Text(
+                        'MM/DD/YYYY',
+                        style: AppTypography.h5Bold.copyWith(
+                          color: theme.hintTextColor,
+                        ),
+                      )
+                    else
+                      Text(
+                        DateFormat.yMd().format(controller.dateOfBirth!),
+                        style: AppTypography.h5Bold.copyWith(
+                          color: theme.primaryTextColor,
+                        ),
+                      ),
+                    const Spacer(),
+                    Icon(
+                      IconlyLight.calendar,
+                      color: theme.defaultIconColor,
+                      size: 28.w,
+                    ),
+                  ],
                 ),
               ),
-            const Spacer(),
-            Icon(
-              IconlyLight.calendar,
-              color: AppColors.kGreyScale500,
-              size: 28.w,
-            ),
-          ],
-        ),
-      ),
-    );
+            ));
   }
 }
 
@@ -269,14 +344,15 @@ class DateOfBirthPicker extends StatelessWidget {
 class ImagePickerDialog extends StatelessWidget {
   const ImagePickerDialog({super.key});
   PersonalInfoController get controller => Get.find<PersonalInfoController>();
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.r),
       ),
-      backgroundColor: AppColors.kWhite,
-      surfaceTintColor: AppColors.kWhite,
+      backgroundColor: theme.dialogColor,
+      surfaceTintColor: theme.dialogColor,
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -355,6 +431,7 @@ class ImagePickerDialog extends StatelessWidget {
 class GenderPicker extends StatelessWidget {
   const GenderPicker({super.key});
   PersonalInfoController get controller => Get.find<PersonalInfoController>();
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -371,7 +448,9 @@ class GenderPicker extends StatelessWidget {
             ),
             Text(
               'Male',
-              style: AppTypography.BodyLMedium,
+              style: AppTypography.BodyLMedium.copyWith(
+                color: theme.primaryTextColor,
+              ),
             ),
           ],
         ),
@@ -387,7 +466,9 @@ class GenderPicker extends StatelessWidget {
             ),
             Text(
               'Female',
-              style: AppTypography.BodyLMedium,
+              style: AppTypography.BodyLMedium.copyWith(
+                color: theme.primaryTextColor,
+              ),
             ),
           ],
         ),
@@ -403,7 +484,9 @@ class GenderPicker extends StatelessWidget {
             ),
             Text(
               'Other',
-              style: AppTypography.BodyLMedium,
+              style: AppTypography.BodyLMedium.copyWith(
+                color: theme.primaryTextColor,
+              ),
             ),
           ],
         ),

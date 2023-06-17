@@ -15,11 +15,14 @@ import 'package:pixlify/components/widgets/skinny_text_form_field.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/widgets/social_media_tile.dart';
 import 'package:pixlify/components/widgets/success_dialog.dart';
+import 'package:pixlify/infrastructure/navigation/routes.dart';
 import 'package:pixlify/presentation/sign_in/controllers/sign_in.controller.dart';
 import 'package:pixlify/presentation/sign_up/controllers/sign_up.controller.dart';
+import 'package:pixlify/theme.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+  ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return GetX<SignUpController>(
@@ -49,6 +52,7 @@ class SignUpScreen extends StatelessWidget {
                       },
                       icon: Icon(
                         IconlyLight.arrow_left,
+                        color: theme.defaultIconColor,
                         size: 28.w,
                       ),
                       padding: EdgeInsets.zero,
@@ -58,18 +62,24 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Text(
                       'Hello there 👋',
-                      style: AppTypography.h3Bold,
+                      style: AppTypography.h3Bold.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     Text(
                       'Please enter your email & password to create an account.',
-                      style: AppTypography.BodyXlRegular,
+                      style: AppTypography.BodyXlRegular.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     SizedBox(
                       height: 24.h,
                     ),
                     Text(
                       'Email',
-                      style: AppTypography.BodyLBold,
+                      style: AppTypography.BodyLBold.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     SkinnyTextFormField(
                       controller: controller.email,
@@ -84,7 +94,9 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Text(
                       'Password',
-                      style: AppTypography.BodyLBold,
+                      style: AppTypography.BodyLBold.copyWith(
+                        color: theme.primaryTextColor,
+                      ),
                     ),
                     SkinnyPasswordTextFormField(
                       controller: controller.pwd,
@@ -102,12 +114,16 @@ class SignUpScreen extends StatelessWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                  text: 'I agree to the ',
-                                  style: AppTypography.BodyLMedium),
+                                text: 'I agree to the ',
+                                style: AppTypography.BodyLMedium.copyWith(
+                                  color: theme.primaryTextColor,
+                                ),
+                              ),
                               TextSpan(
                                 text: 'Pixlify Terms, & Privacy Policy.',
                                 style: AppTypography.BodyLSemiBold.copyWith(
-                                    color: AppColors.kPrimary),
+                                  color: AppColors.kPrimary,
+                                ),
                               ),
                             ],
                           ),
@@ -117,8 +133,8 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(
                       height: 25.h,
                     ),
-                    const Divider(
-                      color: AppColors.kGreyScale200,
+                    Divider(
+                      color: theme.primaryDividerColor,
                     ),
                     SizedBox(
                       height: 30.h,
@@ -128,14 +144,16 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Already have an account?',
-                          style: AppTypography.BodyLMedium,
+                          style: AppTypography.BodyLMedium.copyWith(
+                            color: theme.primaryTextColor,
+                          ),
                         ),
                         SizedBox(
                           width: 8.w,
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offAndToNamed('/sign-in');
+                            Get.offAndToNamed(Routes.SIGN_IN);
                           },
                           child: Text(
                             'Sign In',
@@ -153,7 +171,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Divider(
-                            color: AppColors.kGreyScale200,
+                            color: theme.primaryDividerColor,
                           ),
                         ),
                         Padding(
@@ -161,21 +179,19 @@ class SignUpScreen extends StatelessWidget {
                           child: Text(
                             'or continue with',
                             style: AppTypography.h6Medium.copyWith(
-                              color: AppColors.kGreyScale700,
+                              color: theme.subtextColor,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            color: AppColors.kGreyScale200,
+                            color: theme.primaryDividerColor,
                           ),
                         ),
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       height: 20.h,
-                      width: double.maxFinite,
-                      color: AppColors.kWhite,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,15 +220,16 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           bottomSheet: Container(
-              color: AppColors.kWhite,
-              padding: EdgeInsets.all(24.w),
-              height: 110.h,
-              child: RoundedButton(
-                onTap: () async {
-                  Get.toNamed('/personal-info');
-                },
-                label: 'Sign up',
-              )),
+            color: AppColors.kWhite,
+            padding: EdgeInsets.all(24.w),
+            height: 110.h,
+            child: RoundedButton(
+              onTap: () async {
+                Get.toNamed(Routes.PERSONAL_INFO);
+              },
+              label: 'Sign up',
+            ),
+          ),
         );
       },
     );
