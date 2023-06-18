@@ -214,13 +214,16 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: 120.h,
+                    )
                   ],
                 ),
               ),
             ),
           ),
           bottomSheet: Container(
-            color: AppColors.kWhite,
+            color: theme.scaffoldColor,
             padding: EdgeInsets.all(24.w),
             height: 110.h,
             child: RoundedButton(

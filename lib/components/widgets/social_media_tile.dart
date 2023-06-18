@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/theme.dart';
 
 /// Tile version of the social media button. Contains only the icon.

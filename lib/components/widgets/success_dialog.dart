@@ -4,15 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
-import 'package:pixlify/components/images/animations.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/theme.dart';
 
 /// To be shown via Get.dialog<void>(SuccessDialog()); Shows a dialog with the
-/// success lottie animation, a title and a description.
+/// success vector, a title and a description.
 class SuccessDialog extends StatelessWidget {
   const SuccessDialog({
     required this.title,

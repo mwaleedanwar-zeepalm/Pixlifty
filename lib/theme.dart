@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +52,7 @@ class ThemeService extends GetxService {
       isDarkMode ? AppColors.kDark3 : AppColors.kGreyScale200;
   Color get dialogColor => isDarkMode ? AppColors.kDark3 : AppColors.kWhite;
   Color get navigationBarBackgroundColor =>
-      isDarkMode ? AppColors.kDark5.withOpacity(0.85) : AppColors.kWhite;
+      isDarkMode ? AppColors.kDark1 : AppColors.kWhite;
   LinearGradient get imageFadeMask => isDarkMode
       ? LinearGradient(
           begin: Alignment.topCenter,

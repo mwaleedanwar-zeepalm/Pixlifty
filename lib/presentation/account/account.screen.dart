@@ -350,12 +350,16 @@ class LogoutBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RoundedButtonLite(
-                      width: 180,
-                      onTap: () => Get.back<void>(),
-                      label: 'Cancel'),
+                    width: 180,
+                    onTap: () => Get.back<void>(),
+                    label: 'Cancel',
+                  ),
                   RoundedButton(
                     width: 180,
-                    onTap: () => Get.find<AuthWrapperController>().signOut(),
+                    onTap: () {
+                      Get.back<void>();
+                      Get.find<AuthWrapperController>().signOut();
+                    },
                     label: 'Yes, Logout',
                   ),
                 ],

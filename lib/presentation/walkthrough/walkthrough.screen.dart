@@ -42,7 +42,7 @@ class WalkthroughScreen extends StatelessWidget {
                         ),
                       ),
                       Align(
-                        alignment: Alignment(0, 0.65),
+                        alignment: Alignment(0, 0.5),
                         child: SmoothPageIndicator(
                           controller: controller.pageController,
                           effect: WormEffect(
@@ -133,6 +133,9 @@ class WalkthroughScreenOne extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    SizedBox(
+                      height: 150.h,
+                    ),
                   ],
                 ),
               ),
@@ -189,7 +192,7 @@ class WalkthroughScreenTwo extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
-                      height: 30.h,
+                      height: 150.h,
                     ),
                   ],
                 ),
@@ -247,7 +250,7 @@ class WalkthroughScreenThree extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
-                      height: 30.h,
+                      height: 150.h,
                     ),
                   ],
                 ),

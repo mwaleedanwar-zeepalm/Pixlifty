@@ -94,6 +94,9 @@ class _SkinnyPasswordTextFormFieldState
         errorStyle: AppTypography.BodyMRegular.copyWith(
           color: AppColors.kAlertError,
         ),
+        hintStyle: AppTypography.h5Bold.copyWith(
+          color: theme.hintTextColor,
+        ),
         errorMaxLines: 1,
         disabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(

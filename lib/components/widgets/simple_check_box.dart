@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 
+// ignore: must_be_immutable
 class SimpleCheckBox extends StatefulWidget {
   SimpleCheckBox({required this.checked, super.key});
   bool checked;

@@ -35,6 +35,7 @@ class HomeViewScreen extends StatelessWidget {
             child: Text('Error'),
           );
         }
+
         return Padding(
           padding: EdgeInsets.only(
             right: 24.w,
@@ -57,6 +58,9 @@ class HomeViewScreen extends StatelessWidget {
               centerTitle: true,
             ),
             body: NestedScrollView(
+              physics: controller.recentImages.isEmpty
+                  ? const NeverScrollableScrollPhysics()
+                  : null,
               headerSliverBuilder: (context, value) {
                 return [
                   SliverToBoxAdapter(
@@ -70,7 +74,9 @@ class HomeViewScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Photos',
-                              style: AppTypography.h4Bold,
+                              style: AppTypography.h4Bold.copyWith(
+                                color: theme.primaryTextColor,
+                              ),
                             ),
                             const Spacer(),
                             RoundedButtonLite(
@@ -87,37 +93,47 @@ class HomeViewScreen extends StatelessWidget {
                   ),
                 ];
               },
-              body: GridView.builder(
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemCount: controller.recentImages.length,
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  vertical: 20.h,
-                ),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () => Get.dialog<Widget>(
-                      ConfirmImageEnhanceDialog(
-                        image: controller.recentImages[index],
-                      ),
-                      barrierDismissible: false,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(6.0.w),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: Image.file(
-                          controller.recentImages[index],
-                          fit: BoxFit.cover,
+              body: controller.recentImages.isEmpty
+                  ? Center(
+                      child: Text(
+                        'No Images Found',
+                        style: AppTypography.h1Bold.copyWith(
+                          color: theme.primaryTextColor,
                         ),
                       ),
+                    )
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                      itemCount: controller.recentImages.length,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20.h,
+                      ),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () => Get.dialog<Widget>(
+                            ConfirmImageEnhanceDialog(
+                              image: controller.recentImages[index],
+                            ),
+                            barrierDismissible: false,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(6.0.w),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.r),
+                              child: Image.file(
+                                controller.recentImages[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             ),
           ),
         );

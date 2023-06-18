@@ -112,7 +112,9 @@ class SignInScreen extends StatelessWidget {
                         ),
                         Text(
                           'Remember me',
-                          style: AppTypography.BodyLSemiBold,
+                          style: AppTypography.BodyLSemiBold.copyWith(
+                            color: theme.primaryTextColor,
+                          ),
                         ),
                       ],
                     ),
@@ -192,10 +194,8 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       height: 20.h,
-                      width: double.maxFinite,
-                      color: AppColors.kWhite,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,27 +219,29 @@ class SignInScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 24.h,
-                    ),
-                    RoundedButton(
-                      onTap: () async {
-                        await showSuccessDialog(
-                          title: 'Sign in Successful!',
-                          description:
-                              'Please wait...\nYou will be directed to the homepage.',
-                        );
-                        Get
-                          ..back<void>()
-                          ..find<AuthWrapperController>().signIn();
-                      },
-                      label: 'Sign in',
-                    ),
-                    SizedBox(
-                      height: 24.h,
+                      height: 120.h,
                     ),
                   ],
                 ),
               ),
+            ),
+          ),
+          bottomSheet: Container(
+            color: theme.scaffoldColor,
+            padding: EdgeInsets.all(24.w),
+            height: 110.h,
+            child: RoundedButton(
+              onTap: () async {
+                await showSuccessDialog(
+                  title: 'Sign in Successful!',
+                  description:
+                      'Please wait...\nYou will be directed to the homepage.',
+                );
+                Get
+                  ..back<void>()
+                  ..find<AuthWrapperController>().signIn();
+              },
+              label: 'Sign in',
             ),
           ),
         );
