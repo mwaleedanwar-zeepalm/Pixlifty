@@ -64,6 +64,7 @@ class AppColors {
   static const kDeepOrange = Color(0xFFFF5722);
   static const kBrown = Color(0xFF795548);
   static const kGrey = Color(0xFF9E9E9E);
+  static const kBlueBlack = Color(0xFF09101D);
 }
 
 /// Contains all the background colors used in the app

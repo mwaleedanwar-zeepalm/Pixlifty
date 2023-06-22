@@ -7,8 +7,12 @@ import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/presentation/account/controllers/account.controller.dart';
 import 'package:pixlify/theme.dart';
 
+/// Change language screen
 class LanguageScreen extends StatelessWidget {
+  /// Constructor
   const LanguageScreen({super.key});
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
@@ -78,15 +82,25 @@ class LanguageScreen extends StatelessWidget {
   }
 }
 
+/// List Tile to choose and display current app language
 class LanguageListTile extends StatelessWidget {
-  final String language;
-  final bool isCurrent;
+  /// Constructor
   const LanguageListTile({
     required this.language,
     required this.isCurrent,
     super.key,
   });
+
+  /// language name
+  final String language;
+
+  /// <bool> is current language. If true displays a tick at the end
+  final bool isCurrent;
+
+  /// Access account controller
   AccountController get controller => Get.find<AccountController>();
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {

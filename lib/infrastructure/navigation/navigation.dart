@@ -140,7 +140,7 @@ class Nav {
     ),
     GetPage(
       name: Routes.ABOUT,
-      page: () => const AboutPixxlify(),
+      page: () => const AboutPixlify(),
       binding: AccountControllerBinding(),
     ),
     GetPage(

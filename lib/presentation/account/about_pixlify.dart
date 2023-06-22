@@ -3,13 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/theme.dart';
 
-class AboutPixxlify extends StatelessWidget {
-  const AboutPixxlify({super.key});
+/// Shows the abour page with version number and other links
+class AboutPixlify extends StatelessWidget {
+  /// Constructor
+  const AboutPixlify({super.key});
+
+  ///Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
@@ -87,13 +90,28 @@ class AboutPixxlify extends StatelessWidget {
   }
 }
 
+/// List tile widget for the options on the about page.
+/// Pass in a String title and and a VoidCallBack onTap
 class AboutTile extends StatelessWidget {
-  const AboutTile(this.title, {super.key});
+  /// constructor
+  const AboutTile(
+    this.title, {
+    this.onTap,
+    super.key,
+  });
+
+  /// Title of the tile
   final String title;
+
+  /// On tap function. Change type as needed
+  final void Function()? onTap;
+
+  ///Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       contentPadding: EdgeInsets.zero,
       minVerticalPadding: 0,
       title: Text(

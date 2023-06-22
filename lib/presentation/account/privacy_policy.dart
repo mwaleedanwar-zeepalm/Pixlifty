@@ -6,9 +6,15 @@ import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/presentation/account/controllers/account.controller.dart';
 import 'package:pixlify/theme.dart';
 
+/// Privacy policy screen
 class PrivacyPolicyScreen extends StatelessWidget {
+  /// Constructor
   const PrivacyPolicyScreen({super.key});
+
+  /// Access account controller
   AccountController get controller => Get.find<AccountController>();
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {

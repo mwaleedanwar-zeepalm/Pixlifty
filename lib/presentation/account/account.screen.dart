@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,10 +14,15 @@ import 'package:pixlify/presentation/account/controllers/account.controller.dart
 import 'package:pixlify/presentation/auth_wrapper/controllers/auth_wrapper.controller.dart';
 import 'package:pixlify/theme.dart';
 
+/// Main account screen displayed in the account tab.
 class AccountScreen extends GetView<AccountController> {
-  const AccountScreen({Key? key}) : super(key: key);
+  /// Constructor
+  const AccountScreen({super.key});
 
+  /// Put controller in memory
   AccountController get controller => Get.put(AccountController());
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
@@ -106,6 +110,7 @@ class AccountScreen extends GetView<AccountController> {
 
 /// Stateless banner to advertise pro membership.
 class UpgradeToProBanner extends StatelessWidget {
+  /// constructor
   const UpgradeToProBanner({super.key});
 
   @override
@@ -157,11 +162,16 @@ class UpgradeToProBanner extends StatelessWidget {
 
 /// Subsection divider with a subtitle and a divider separated by 16px.
 class SubsectionDivider extends StatelessWidget {
+  /// Constructor
   const SubsectionDivider({
     required this.subtitle,
     super.key,
   });
+
+  /// subtitle
   final String subtitle;
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
@@ -220,10 +230,15 @@ class SettingTile extends StatelessWidget {
   }
 }
 
+/// List tile to control the dark mode option of the app
 class DarkModeTile extends StatelessWidget {
+  /// constructor
   const DarkModeTile({super.key});
 
+  /// Access account service
   AccountController get controller => Get.find<AccountController>();
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
@@ -248,7 +263,7 @@ class DarkModeTile extends StatelessWidget {
           activeColor: AppColors.kPrimary,
           inactiveTrackColor: AppColors.kGreyScale300,
           inactiveThumbColor: AppColors.kWhite,
-          trackOutlineColor: MaterialStatePropertyAll(
+          trackOutlineColor: const MaterialStatePropertyAll(
             Colors.transparent,
           ),
         ),
@@ -257,7 +272,9 @@ class DarkModeTile extends StatelessWidget {
   }
 }
 
+/// List tile to log out from the app. Opens a confirmation bottom sheet.
 class LogOutTile extends StatelessWidget {
+  /// constructor
   const LogOutTile({super.key});
 
   @override
@@ -265,10 +282,10 @@ class LogOutTile extends StatelessWidget {
     return ListTile(
       onTap: () => showModalBottomSheet<Widget>(
         context: context,
-        barrierColor: Color(0xFF09101D).withOpacity(0.6),
+        barrierColor: AppColors.kBlueBlack.withOpacity(0.6),
         builder: (context) => BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-          child: LogoutBottomSheet(),
+          child: const LogoutBottomSheet(),
         ),
       ),
       contentPadding: EdgeInsets.zero,
@@ -288,8 +305,12 @@ class LogOutTile extends StatelessWidget {
   }
 }
 
+/// Bottom sheet that confirms logout action
 class LogoutBottomSheet extends StatelessWidget {
+  /// constructor
   const LogoutBottomSheet({super.key});
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {

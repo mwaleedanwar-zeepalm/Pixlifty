@@ -8,8 +8,12 @@ import 'package:pixlify/components/widgets/rounded_button_lite.dart';
 import 'package:pixlify/presentation/account/controllers/account.controller.dart';
 import 'package:pixlify/theme.dart';
 
+/// Security options screen
 class SecurityScreen extends StatelessWidget {
+  /// Constructor
   const SecurityScreen({super.key});
+
+  /// Access theme service
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
@@ -37,113 +41,40 @@ class SecurityScreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            ListTile(
-              title: Text(
-                'Remember Me',
-                style: AppTypography.h5SemiBold.copyWith(
-                  color: theme.primaryTextColor,
-                ),
-              ),
-              trailing: Switch(
-                value: controller.rememberMe,
-                onChanged: (checked) {
-                  controller
-                    ..rememberMe = checked
-                    ..update();
-                },
-                activeColor: AppColors.kPrimary,
-                inactiveTrackColor: AppColors.kGreyScale300,
-                inactiveThumbColor: AppColors.kWhite,
-                trackOutlineColor: MaterialStatePropertyAll(
-                  Colors.transparent,
-                ),
-              ),
+            SecurityOptionTile(
+              title: 'Remember me',
+              value: controller.rememberMe,
+              onChanged: (bool checked) {
+                controller.rememberMe = checked;
+              },
             ),
-            ListTile(
-              title: Text(
-                'Biometric ID',
-                style: AppTypography.h5SemiBold.copyWith(
-                  color: theme.primaryTextColor,
-                ),
-              ),
-              trailing: Switch(
-                value: controller.bioMetricId,
-                onChanged: (checked) {
-                  controller
-                    ..bioMetricId = checked
-                    ..update();
-                },
-                activeColor: AppColors.kPrimary,
-                inactiveTrackColor: AppColors.kGreyScale300,
-                inactiveThumbColor: AppColors.kWhite,
-                trackOutlineColor: MaterialStatePropertyAll(
-                  Colors.transparent,
-                ),
-              ),
+            SecurityOptionTile(
+              title: 'Biometric ID',
+              value: controller.bioMetricId,
+              onChanged: (bool checked) {
+                controller.bioMetricId = checked;
+              },
             ),
-            ListTile(
-              title: Text(
-                'Face ID',
-                style: AppTypography.h5SemiBold.copyWith(
-                  color: theme.primaryTextColor,
-                ),
-              ),
-              trailing: Switch(
-                value: controller.faceId,
-                onChanged: (checked) {
-                  controller.faceId = checked;
-                },
-                activeColor: AppColors.kPrimary,
-                inactiveTrackColor: AppColors.kGreyScale300,
-                inactiveThumbColor: AppColors.kWhite,
-                trackOutlineColor: MaterialStatePropertyAll(
-                  Colors.transparent,
-                ),
-              ),
+            SecurityOptionTile(
+              title: 'Face ID',
+              value: controller.faceId,
+              onChanged: (bool checked) {
+                controller.faceId = checked;
+              },
             ),
-            ListTile(
-              title: Text(
-                'SMS Authenticator',
-                style: AppTypography.h5SemiBold.copyWith(
-                  color: theme.primaryTextColor,
-                ),
-              ),
-              trailing: Switch(
-                value: controller.smsAuth,
-                onChanged: (checked) {
-                  controller
-                    ..smsAuth = checked
-                    ..update();
-                },
-                activeColor: AppColors.kPrimary,
-                inactiveTrackColor: AppColors.kGreyScale300,
-                inactiveThumbColor: AppColors.kWhite,
-                trackOutlineColor: MaterialStatePropertyAll(
-                  Colors.transparent,
-                ),
-              ),
+            SecurityOptionTile(
+              title: 'SMS Authenticator',
+              value: controller.smsAuth,
+              onChanged: (bool checked) {
+                controller.smsAuth = checked;
+              },
             ),
-            ListTile(
-              title: Text(
-                'Google Authenticator',
-                style: AppTypography.h5SemiBold.copyWith(
-                  color: theme.primaryTextColor,
-                ),
-              ),
-              trailing: Switch(
-                value: controller.googleAuth,
-                onChanged: (checked) {
-                  controller
-                    ..googleAuth = checked
-                    ..update();
-                },
-                activeColor: AppColors.kPrimary,
-                inactiveTrackColor: AppColors.kGreyScale300,
-                inactiveThumbColor: AppColors.kWhite,
-                trackOutlineColor: MaterialStatePropertyAll(
-                  Colors.transparent,
-                ),
-              ),
+            SecurityOptionTile(
+              title: 'Google Authenticator',
+              value: controller.googleAuth,
+              onChanged: (bool checked) {
+                controller.googleAuth = checked;
+              },
             ),
             ListTile(
               title: Text(
@@ -165,6 +96,51 @@ class SecurityScreen extends StatelessWidget {
               label: 'Change Password',
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Security option tile
+class SecurityOptionTile extends StatelessWidget {
+  /// Constructor
+  const SecurityOptionTile({
+    required this.title,
+    required this.value,
+    required this.onChanged,
+    super.key,
+  });
+
+  /// Security option name.
+  final String title;
+
+  /// Current value of the switch (assign from controller)
+  final bool value;
+
+  /// On change callback
+  final void Function(bool)? onChanged;
+
+  /// Access theme service
+  ThemeService get theme => Get.find<ThemeService>();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        'Face ID',
+        style: AppTypography.h5SemiBold.copyWith(
+          color: theme.primaryTextColor,
+        ),
+      ),
+      trailing: Switch(
+        value: value,
+        onChanged: onChanged,
+        activeColor: AppColors.kPrimary,
+        inactiveTrackColor: AppColors.kGreyScale300,
+        inactiveThumbColor: AppColors.kWhite,
+        trackOutlineColor: const MaterialStatePropertyAll(
+          Colors.transparent,
         ),
       ),
     );
