@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
+import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/presentation/ai_batch_enhance/controllers/ai_batch_enhance.controller.dart';
 import 'package:pixlify/theme.dart';
@@ -144,10 +146,11 @@ class BatchEnhancePreviewThumbnail extends StatelessWidget {
             color: AppColors.kPrimary,
           ),
           alignment: Alignment.center,
-          child: Icon(
-            Icons.close,
+          child: SvgPicture.asset(
+            Images.replaceIcon,
             color: AppColors.kWhite,
-            size: 16.w,
+            width: 16.w,
+            height: 16.w,
           ),
         ),
       ),

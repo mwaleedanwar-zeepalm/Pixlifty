@@ -86,7 +86,7 @@ class AddNewPaymentScreen extends StatelessWidget {
                   style: AppTypography.BodyLBold,
                 ),
                 SkinnyTextFormField(
-                  controller: controller.cardHolderName,
+                  controller: controller.cardCVV,
                   hintText: '3 Digits on the back of Card',
                 ),
                 SizedBox(

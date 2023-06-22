@@ -116,6 +116,7 @@ class UpgradeToProBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(16.r),
       onTap: () => Get.toNamed(Routes.UPGRADE_TO_PRO),
       child: Container(
         decoration: BoxDecoration(

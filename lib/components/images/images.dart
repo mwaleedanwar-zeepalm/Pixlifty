@@ -61,4 +61,5 @@ class Images {
   static const yahooShareIcon = 'assets/yahoo_share_icon.png';
   static const chatShareIcon = 'assets/chat_share_icon.png';
   static const wechatShareIcon = 'assets/wechat_share_icon.png';
+  static const replaceIcon = 'assets/replace_icon.svg';
 }

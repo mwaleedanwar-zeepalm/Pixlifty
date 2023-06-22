@@ -11,6 +11,7 @@ import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/components/widgets/alert_button.dart';
 import 'package:pixlify/components/widgets/skinny_text_form_field.dart';
+import 'package:pixlify/presentation/auth_wrapper/controllers/auth_wrapper.controller.dart';
 
 import 'package:pixlify/presentation/personal_info/controllers/personal_info.controller.dart';
 import 'package:iconly/iconly.dart';
@@ -70,6 +71,7 @@ class PersonalInfoScreen extends StatelessWidget {
                   ),
                   Center(
                     child: InkWell(
+                      splashColor: Colors.transparent,
                       onTap: () async {
                         await Get.dialog<Widget>(
                           const ImagePickerDialog(),
@@ -197,8 +199,12 @@ class PersonalInfoScreen extends StatelessWidget {
                     height: 12.h,
                   ),
                   SimpleButton(
-                    onTap: () {
-                      Get.dialog<Widget>(const SignUpSuccess());
+                    onTap: () async {
+                      await Get.dialog<Widget>(const SignUpSuccess());
+                      Get
+                        ..back<void>()
+                        ..back<void>()
+                        ..find<AuthWrapperController>().signIn();
                     },
                     label: 'Save',
                   ),
@@ -221,122 +227,122 @@ class DateOfBirthPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<PersonalInfoController>(
-        builder: (controller) => InkWell(
-              onTap: () async {
-                await Get.bottomSheet<Widget>(
-                  Container(
-                    height: 300.h,
-                    decoration: BoxDecoration(
-                      color: theme.bottomSheetColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16.r),
-                        topRight: Radius.circular(16.r),
-                      ),
-                    ),
-                    child: CupertinoDatePicker(
-                      backgroundColor: theme.bottomSheetColor,
-                      dateOrder: DatePickerDateOrder.mdy,
-                      mode: CupertinoDatePickerMode.date,
-                      initialDateTime: DateTime.now(),
-                      onDateTimeChanged: (DateTime newDateTime) {
-                        controller.updateDateOfBirth(newDateTime);
-                      },
-                    ),
-                  ),
-                );
-                // controller.updateDateOfBirth(
-                //   await showDatePicker(
-                //     context: context,
-                //     initialDate: DateTime.now(),
-                //     firstDate: DateTime.now().subtract(24000.days),
-                //     lastDate: DateTime.now(),
-                //     initialDatePickerMode: DatePickerMode.year,
-                //     initialEntryMode: DatePickerEntryMode.input,
-                //     currentDate: controller.dateOfBirth,
-                //     builder: (context, child) => DatePickerTheme(
-                //       data: DatePickerThemeData(
-                //         backgroundColor: theme.scaffoldColor,
-                //         headerBackgroundColor: theme.scaffoldColor,
-                //         yearForegroundColor:
-                //             MaterialStateProperty.resolveWith((states) {
-                //           if (states.contains(MaterialState.selected)) {
-                //             return AppColors.kWhite;
-                //           }
-                //           return theme.primaryTextColor;
-                //         }),
-                //         yearBackgroundColor:
-                //             MaterialStateProperty.resolveWith((states) {
-                //           if (states.contains(MaterialState.selected)) {
-                //             return AppColors.kPrimary;
-                //           }
-                //           return theme.scaffoldColor;
-                //         }),
-                //         yearOverlayColor: MaterialStatePropertyAll(
-                //           AppColors.kPrimary,
-                //         ),
-                //         todayBackgroundColor:
-                //             MaterialStateProperty.resolveWith((states) {
-                //           if (states.contains(MaterialState.selected)) {
-                //             return AppColors.kPrimary;
-                //           }
-                //           return theme.scaffoldColor;
-                //         }),
-                //         todayForegroundColor:
-                //             MaterialStateProperty.resolveWith((states) {
-                //           if (states.contains(MaterialState.selected)) {
-                //             return AppColors.kWhite;
-                //           }
-                //           return theme.primaryTextColor;
-                //         }),
-                //         todayBorder: BorderSide(
-                //           color: theme.scaffoldColor,
-                //           width: 0,
-                //         ),
-                //         yearStyle: AppTypography.BodyMMedium.copyWith(
-                //           color: theme.primaryTextColor,
-                //         ),
-                //         rangePickerBackgroundColor: theme.scaffoldColor,
-                //       ),
-                //       child: child!,
-                //     ),
-                //   ),
-                // );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom:
-                        BorderSide(color: AppColors.kGreyScale500, width: 1.w),
-                  ),
-                ),
-                height: 40.h,
-                width: Get.width,
-                child: Row(
-                  children: [
-                    if (controller.dateOfBirth == null)
-                      Text(
-                        'MM/DD/YYYY',
-                        style: AppTypography.h5Bold.copyWith(
-                          color: theme.hintTextColor,
-                        ),
-                      )
-                    else
-                      Text(
-                        DateFormat.yMd().format(controller.dateOfBirth!),
-                        style: AppTypography.h5Bold.copyWith(
-                          color: theme.primaryTextColor,
-                        ),
-                      ),
-                    const Spacer(),
-                    Icon(
-                      IconlyLight.calendar,
-                      color: theme.defaultIconColor,
-                      size: 28.w,
-                    ),
-                  ],
+      builder: (controller) => InkWell(
+        onTap: () async {
+          await Get.bottomSheet<Widget>(
+            Container(
+              height: 300.h,
+              decoration: BoxDecoration(
+                color: theme.bottomSheetColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16.r),
+                  topRight: Radius.circular(16.r),
                 ),
               ),
-            ));
+              child: CupertinoDatePicker(
+                backgroundColor: theme.bottomSheetColor,
+                dateOrder: DatePickerDateOrder.mdy,
+                mode: CupertinoDatePickerMode.date,
+                initialDateTime: DateTime.now(),
+                onDateTimeChanged: (DateTime newDateTime) {
+                  controller.updateDateOfBirth(newDateTime);
+                },
+              ),
+            ),
+          );
+          // controller.updateDateOfBirth(
+          //   await showDatePicker(
+          //     context: context,
+          //     initialDate: DateTime.now(),
+          //     firstDate: DateTime.now().subtract(24000.days),
+          //     lastDate: DateTime.now(),
+          //     initialDatePickerMode: DatePickerMode.year,
+          //     initialEntryMode: DatePickerEntryMode.input,
+          //     currentDate: controller.dateOfBirth,
+          //     builder: (context, child) => DatePickerTheme(
+          //       data: DatePickerThemeData(
+          //         backgroundColor: theme.scaffoldColor,
+          //         headerBackgroundColor: theme.scaffoldColor,
+          //         yearForegroundColor:
+          //             MaterialStateProperty.resolveWith((states) {
+          //           if (states.contains(MaterialState.selected)) {
+          //             return AppColors.kWhite;
+          //           }
+          //           return theme.primaryTextColor;
+          //         }),
+          //         yearBackgroundColor:
+          //             MaterialStateProperty.resolveWith((states) {
+          //           if (states.contains(MaterialState.selected)) {
+          //             return AppColors.kPrimary;
+          //           }
+          //           return theme.scaffoldColor;
+          //         }),
+          //         yearOverlayColor: MaterialStatePropertyAll(
+          //           AppColors.kPrimary,
+          //         ),
+          //         todayBackgroundColor:
+          //             MaterialStateProperty.resolveWith((states) {
+          //           if (states.contains(MaterialState.selected)) {
+          //             return AppColors.kPrimary;
+          //           }
+          //           return theme.scaffoldColor;
+          //         }),
+          //         todayForegroundColor:
+          //             MaterialStateProperty.resolveWith((states) {
+          //           if (states.contains(MaterialState.selected)) {
+          //             return AppColors.kWhite;
+          //           }
+          //           return theme.primaryTextColor;
+          //         }),
+          //         todayBorder: BorderSide(
+          //           color: theme.scaffoldColor,
+          //           width: 0,
+          //         ),
+          //         yearStyle: AppTypography.BodyMMedium.copyWith(
+          //           color: theme.primaryTextColor,
+          //         ),
+          //         rangePickerBackgroundColor: theme.scaffoldColor,
+          //       ),
+          //       child: child!,
+          //     ),
+          //   ),
+          // );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: AppColors.kGreyScale500, width: 1.w),
+            ),
+          ),
+          height: 40.h,
+          width: Get.width,
+          child: Row(
+            children: [
+              if (controller.dateOfBirth == null)
+                Text(
+                  'MM/DD/YYYY',
+                  style: AppTypography.h5Bold.copyWith(
+                    color: theme.hintTextColor,
+                  ),
+                )
+              else
+                Text(
+                  DateFormat.yMd().format(controller.dateOfBirth!),
+                  style: AppTypography.h5Bold.copyWith(
+                    color: theme.primaryTextColor,
+                  ),
+                ),
+              const Spacer(),
+              Icon(
+                IconlyLight.calendar,
+                color: theme.defaultIconColor,
+                size: 28.w,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -434,63 +440,65 @@ class GenderPicker extends StatelessWidget {
   ThemeService get theme => Get.find<ThemeService>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Radio<Gender?>.adaptive(
-              value: Gender.Male,
-              groupValue: controller.gender,
-              activeColor: AppColors.kPrimary,
-              onChanged: (gender) {
-                controller.updateGender(gender ?? Gender.Male);
-              },
-            ),
-            Text(
-              'Male',
-              style: AppTypography.BodyLMedium.copyWith(
-                color: theme.primaryTextColor,
+    return Obx(
+      () => Column(
+        children: [
+          Row(
+            children: [
+              Radio<Gender?>.adaptive(
+                value: Gender.Male,
+                groupValue: controller.gender,
+                activeColor: AppColors.kPrimary,
+                onChanged: (gender) {
+                  controller.updateGender(gender ?? Gender.Male);
+                },
               ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Radio<Gender?>.adaptive(
-              value: Gender.Female,
-              groupValue: controller.gender,
-              activeColor: AppColors.kPrimary,
-              onChanged: (gender) {
-                controller.updateGender(gender ?? Gender.Female);
-              },
-            ),
-            Text(
-              'Female',
-              style: AppTypography.BodyLMedium.copyWith(
-                color: theme.primaryTextColor,
+              Text(
+                'Male',
+                style: AppTypography.BodyLMedium.copyWith(
+                  color: theme.primaryTextColor,
+                ),
               ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Radio<Gender?>.adaptive(
-              value: Gender.Other,
-              groupValue: controller.gender,
-              activeColor: AppColors.kPrimary,
-              onChanged: (gender) {
-                controller.updateGender(gender ?? Gender.Other);
-              },
-            ),
-            Text(
-              'Other',
-              style: AppTypography.BodyLMedium.copyWith(
-                color: theme.primaryTextColor,
+            ],
+          ),
+          Row(
+            children: [
+              Radio<Gender?>.adaptive(
+                value: Gender.Female,
+                groupValue: controller.gender,
+                activeColor: AppColors.kPrimary,
+                onChanged: (gender) {
+                  controller.updateGender(gender ?? Gender.Female);
+                },
               ),
-            ),
-          ],
-        ),
-      ],
+              Text(
+                'Female',
+                style: AppTypography.BodyLMedium.copyWith(
+                  color: theme.primaryTextColor,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Radio<Gender?>.adaptive(
+                value: Gender.Other,
+                groupValue: controller.gender,
+                activeColor: AppColors.kPrimary,
+                onChanged: (gender) {
+                  controller.updateGender(gender ?? Gender.Other);
+                },
+              ),
+              Text(
+                'Other',
+                style: AppTypography.BodyLMedium.copyWith(
+                  color: theme.primaryTextColor,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -219,29 +219,24 @@ class SignInScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 120.h,
+                      height: 20.h,
+                    ),
+                    RoundedButton(
+                      onTap: () async {
+                        await showSuccessDialog(
+                          title: 'Sign in Successful!',
+                          description:
+                              'Please wait...\nYou will be directed to the homepage.',
+                        );
+                        Get
+                          ..back<void>()
+                          ..find<AuthWrapperController>().signIn();
+                      },
+                      label: 'Sign in',
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
-          bottomSheet: Container(
-            color: theme.scaffoldColor,
-            padding: EdgeInsets.all(24.w),
-            height: 110.h,
-            child: RoundedButton(
-              onTap: () async {
-                await showSuccessDialog(
-                  title: 'Sign in Successful!',
-                  description:
-                      'Please wait...\nYou will be directed to the homepage.',
-                );
-                Get
-                  ..back<void>()
-                  ..find<AuthWrapperController>().signIn();
-              },
-              label: 'Sign in',
             ),
           ),
         );

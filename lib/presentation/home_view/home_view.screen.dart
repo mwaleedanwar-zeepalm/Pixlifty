@@ -12,6 +12,7 @@ import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/components/widgets/rounded_button.dart';
 import 'package:pixlify/components/widgets/rounded_button_lite.dart';
 import 'package:pixlify/presentation/home_view/confirm_image_enhance_dialog.dart';
+import 'package:pixlify/presentation/landing_page/controllers/landing_page.controller.dart';
 import 'package:pixlify/theme.dart';
 
 import 'controllers/home_view.controller.dart';
@@ -28,11 +29,6 @@ class HomeViewScreen extends StatelessWidget {
         if (controller.loading) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
-          );
-        }
-        if (controller.error) {
-          return const Center(
-            child: Text('Error'),
           );
         }
 
@@ -93,47 +89,56 @@ class HomeViewScreen extends StatelessWidget {
                   ),
                 ];
               },
-              body: controller.recentImages.isEmpty
+              body: controller.error
                   ? Center(
                       child: Text(
-                        'No Images Found',
-                        style: AppTypography.h1Bold.copyWith(
+                        'Error',
+                        style: AppTypography.h3Medium.copyWith(
                           color: theme.primaryTextColor,
                         ),
                       ),
                     )
-                  : GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                      ),
-                      itemCount: controller.recentImages.length,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 20.h,
-                      ),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () => Get.dialog<Widget>(
-                            ConfirmImageEnhanceDialog(
-                              image: controller.recentImages[index],
+                  : controller.recentImages.isEmpty
+                      ? Center(
+                          child: Text(
+                            'No Images Found',
+                            style: AppTypography.h1Bold.copyWith(
+                              color: theme.primaryTextColor,
                             ),
-                            barrierDismissible: false,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(6.0.w),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.r),
-                              child: Image.file(
-                                controller.recentImages[index],
-                                fit: BoxFit.cover,
+                        )
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                          ),
+                          itemCount: controller.recentImages.length,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 20.h,
+                          ),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () => Get.dialog<Widget>(
+                                ConfirmImageEnhanceDialog(
+                                  image: controller.recentImages[index],
+                                ),
+                                barrierDismissible: false,
                               ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                              child: Padding(
+                                padding: EdgeInsets.all(6.0.w),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  child: Image.file(
+                                    controller.recentImages[index],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
             ),
           ),
         );
@@ -144,6 +149,9 @@ class HomeViewScreen extends StatelessWidget {
 
 class AIToolboxBannerHome extends StatelessWidget {
   const AIToolboxBannerHome({super.key});
+
+  LandingPageController get controller => Get.find<LandingPageController>();
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -200,7 +208,7 @@ class AIToolboxBannerHome extends StatelessWidget {
                       ),
                       RoundedButton(
                         onTap: () {
-                          log('Try Now');
+                          controller.setPage(1);
                         },
                         label: 'Try Now',
                         color: AppColors.kWhite,

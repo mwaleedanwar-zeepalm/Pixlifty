@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 
@@ -26,12 +27,13 @@ class CustomOutlineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(borderRadius.r),
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: height?.w ?? 18.h,
         ),
-        width: width?.w ?? double.maxFinite,
+        width: width?.w ?? Get.width,
         decoration: BoxDecoration(
           border: Border.all(color: borderColor ?? AppColors.kPrimary),
           color: AppColors.kWhite,

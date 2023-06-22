@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
+import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/components/widgets/rounded_button.dart';
 import 'package:pixlify/presentation/ai_old_photo_restore/controllers/ai_old_photo_restore.controller.dart';
@@ -131,8 +133,8 @@ class AiOldPhotoRestoreScreen extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   color: AppColors.kPrimary,
                                 ),
-                                child: const Icon(
-                                  Icons.close_rounded,
+                                child: SvgPicture.asset(
+                                  Images.replaceIcon,
                                   color: AppColors.kWhite,
                                 ),
                               ),

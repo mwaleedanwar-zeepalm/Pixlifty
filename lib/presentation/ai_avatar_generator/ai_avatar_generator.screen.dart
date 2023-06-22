@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart' as cp;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:pixlify/components/colors/app_colors.dart';
+import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/components/typography/app_typography.dart';
 import 'package:pixlify/components/widgets/rounded_button.dart';
 import 'package:pixlify/components/widgets/rounded_icon_with_button.dart';
@@ -188,10 +190,11 @@ class BatchEnhancePreviewThumbnailAvatarGenerator extends StatelessWidget {
             color: AppColors.kPrimary,
           ),
           alignment: Alignment.center,
-          child: Icon(
-            Icons.close,
+          child: SvgPicture.asset(
+            Images.replaceIcon,
+            width: 16.w,
+            height: 16.w,
             color: AppColors.kWhite,
-            size: 16.w,
           ),
         ),
       ),

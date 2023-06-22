@@ -91,7 +91,7 @@ class AvatarResultThumbnail extends StatelessWidget {
           width: 24.w,
           height: 24.w,
           margin: EdgeInsets.only(bottom: 10.w, left: 10.w),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.kPrimary,
             shape: BoxShape.circle,
           ),

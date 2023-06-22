@@ -24,10 +24,11 @@ class SocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(100.r),
       onTap: onTap,
       child: Container(
         height: (height ?? 60).h,
-        width: width?.w ?? double.maxFinite,
+        width: width?.w ?? Get.width,
         decoration: BoxDecoration(
           color: theme.socialMediaLoginButtonColor,
           border: Border.all(

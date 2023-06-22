@@ -16,9 +16,8 @@ void main() async {
 
 /// Root widget for the entire app
 class Pixlify extends StatelessWidget {
+  /// Constructor
   const Pixlify({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

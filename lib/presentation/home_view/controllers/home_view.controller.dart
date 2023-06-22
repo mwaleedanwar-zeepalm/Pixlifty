@@ -25,16 +25,6 @@ class HomeViewController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   void updateOptionIndex(int index) {
     _selectedOptionIndex.value = index;
     update();
@@ -66,10 +56,13 @@ class HomeViewController extends GetxController {
       }
     }
     if (Platform.isAndroid) {
-      if (await Permission.storage.request().isGranted ||
-          await Permission.photos.request().isGranted &&
-              await Permission.videos.request().isGranted) {
+      if (await Permission.storage.request().isGranted &&
+          await Permission.photos.request().isGranted) {
         return true;
+      }
+      if (await Permission.storage.isPermanentlyDenied ||
+          await Permission.photos.isPermanentlyDenied) {
+        await openAppSettings();
       }
     }
     return false;

@@ -45,7 +45,7 @@ class EnhanceHomeResult extends StatelessWidget {
                 onPressed: () {
                   showModalBottomSheet<Widget>(
                     context: context,
-                    barrierColor: Color(0xFF09101D).withOpacity(0.6),
+                    barrierColor: AppColors.kBlueBlack.withOpacity(0.6),
                     builder: (context) => BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                       child: const SaveResultsBottomSheet(),
