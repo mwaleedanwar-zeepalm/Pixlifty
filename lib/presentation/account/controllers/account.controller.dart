@@ -6,10 +6,7 @@ import 'package:pixlify/components/images/images.dart';
 import 'package:pixlify/infrastructure/navigation/routes.dart';
 
 class AccountController extends GetxController {
-  set currentLanguage(String value) => _currentLanguage.value = value;
-  String get currentLanguage => _currentLanguage.value;
-  RxString _currentLanguage = 'English (UK)'.obs;
-
+  
   bool get rememberMe => _rememberMe.value;
   bool get bioMetricId => _bioMetricId.value;
   bool get faceId => _faceId.value;
@@ -28,6 +25,9 @@ class AccountController extends GetxController {
   RxBool _smsAuth = false.obs;
   RxBool _googleAuth = false.obs;
 
+  set currentLanguage(String value) => _currentLanguage.value = value;
+  String get currentLanguage => _currentLanguage.value;
+  RxString _currentLanguage = 'English (UK)'.obs;
   final languages = <String>[
     'Spanish',
     'French',
