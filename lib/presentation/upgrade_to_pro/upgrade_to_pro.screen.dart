@@ -75,19 +75,16 @@ class UpgadeToProScreen extends GetView<UpgradeToProController> {
         decoration: BoxDecoration(
           color: theme.scaffoldColor,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            RoundedButton(
-              width: Get.width - 32.w,
-              onTap: () {
-                Get.to<Widget>(ChooseYourPlan.new);
-              },
-              label: 'Upgrade to PRO',
-              color: AppColors.kPrimary,
-            )
-          ],
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+        child: Center(
+          child: RoundedButton(
+            width: Get.width,
+            onTap: () {
+              Get.to<Widget>(ChooseYourPlan.new);
+            },
+            label: 'Upgrade to PRO',
+            color: AppColors.kPrimary,
+          ),
         ),
       ),
     );

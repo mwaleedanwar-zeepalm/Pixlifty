@@ -126,7 +126,7 @@ class AspectRatioDisplayField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 170.w,
+      width: Get.width / 3,
       height: 45.h,
       decoration: BoxDecoration(
         border: Border(

@@ -105,7 +105,7 @@ class AccountController extends GetxController {
     AccountMenuItem(
       title: 'Personal Info',
       icon: IconlyLight.profile,
-      path: '',
+      path: Routes.PERSONAL_INFO,
     ),
     AccountMenuItem(
       title: 'Payment Methods',

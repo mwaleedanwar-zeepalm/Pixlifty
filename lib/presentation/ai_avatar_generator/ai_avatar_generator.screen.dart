@@ -132,7 +132,7 @@ class UploadMoreTileAvatarGenerator extends StatelessWidget {
       alignment: Alignment.center,
       child: InkWell(
         onTap: () {
-          Get.back<void>();
+          controller.pickImages();
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

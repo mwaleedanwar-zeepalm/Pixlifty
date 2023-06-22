@@ -47,12 +47,12 @@ class BgRemoveResult extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
               child: Container(
                 constraints: BoxConstraints(
-                  maxHeight: 573.h,
+                  maxHeight: 550.h,
                   maxWidth: Get.width,
                 ),
                 child: Image.file(
                   controller.image!,
-                  height: 573.h,
+                  height: 550.h,
                   width: Get.width,
                   fit: BoxFit.cover,
                 ),
@@ -65,20 +65,18 @@ class BgRemoveResult extends StatelessWidget {
         width: Get.width,
         height: 120.h,
         color: theme.scaffoldColor,
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            RoundedButton(
-              width: Get.width - 36.w,
-              onTap: () {
-                Get
-                  ..back<void>()
-                  ..back<void>();
-              },
-              label: 'Download',
-            )
-          ],
+        padding: EdgeInsets.symmetric(
+          horizontal: 24.w,
+          vertical: 20.h,
+        ),
+        alignment: Alignment.center,
+        child: RoundedButton(
+          onTap: () {
+            Get
+              ..back<void>()
+              ..back<void>();
+          },
+          label: 'Download',
         ),
       ),
     );
