@@ -1,7 +1,7 @@
 name: Flutter Workflow
 on: 
   push:
-    - development
+    branches: ["development"]
 jobs:
   build:
     name: build release
@@ -23,7 +23,7 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: ncipollo/release-action@v1
         with:
           name: Pixlify.apk
           artifacts: build/app/outputs/flutter-apk/Pixlify.apk
