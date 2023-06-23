@@ -1,5 +1,7 @@
 name: Flutter Workflow
-on: push
+on: 
+  push:
+    - development
 jobs:
   build:
     name: build release
@@ -21,9 +23,9 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
       - name: Upload APK
-        uses: ncipollo/release-action@v1
+        uses: actions/upload-artifact@v2
         with:
           name: Pixlify.apk
-          artifacts: build/app/outputs/flutter-apk/app-release.apk
+          artifacts: build/app/outputs/flutter-apk/Pixlify.apk
           tag: v1.0.${{ github.run_number }}
           token: ${{secrets.BUILD_RELEASE_APK}} 
