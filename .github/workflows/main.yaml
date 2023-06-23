@@ -26,4 +26,4 @@ jobs:
           name: Pixlify.apk
           artifacts: build/app/outputs/flutter-apk/app-release.apk
           tag: v1.0.${{ github.run_number }}
-          token: ${{secret.BUILD_RELEASE_APK}} 
+          token: ${{secrets.BUILD_RELEASE_APK}} 
