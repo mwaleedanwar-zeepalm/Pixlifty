@@ -1,7 +1,8 @@
 name: Flutter Workflow
 on: 
   push:
-    branches: ["development"]
+    branches: 
+      - "development"
 jobs:
   build:
     name: build release
